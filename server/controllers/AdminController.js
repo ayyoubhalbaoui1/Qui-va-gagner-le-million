@@ -9,7 +9,6 @@ const nexmo = require('../config/sms')
 const PartContrller = require('./ParticipantController')
 require('dotenv').config({ path: __dirname + '/../.env' })
 
-//PartContrller.hola();
 class AdminController {
     async loginAdmin(req, res) {
         const body = req.body
@@ -60,10 +59,7 @@ class AdminController {
         const validate = await Participant.findByIdAndUpdate({ _id: req.params.id }, { $set: { is_valid: true } }, { new: true })
         const email = await sendMali(validate)
 
-        // const from = 'million';
-        // const to = validate.phone
-        // const text = `congratulation dear ${validate.full_name} your account is verified you can play anytime and make money `;
-        // const sms = await nexmo.message.sendSms(from, to, text)
+
         res.status(202).send(validate)
     }
 

@@ -15,7 +15,7 @@ require('dotenv').config({ path: __dirname + '/../.env' })
 class ParticipantController {
 
 
-    addParticipant = async (req, res) => {
+    addParticipant = async(req, res) => {
         bcrypt.hash(req.body.password, 10, (err, hash) => {
             if (err) {
                 console.log(err);
@@ -69,7 +69,6 @@ class ParticipantController {
                     id_participants: tokenDecode._id,
                     code: await getNumber()
                 })
-                // console.log(group);
                 const newGroup = await group.save()
                 res.status(200).json({ message: 'tzad fa jdid', group: newGroup })
             } else {
@@ -78,7 +77,6 @@ class ParticipantController {
                     id_participants: tokenDecode._id,
                     code: await getNumber()
                 })
-                // console.log(group);
                 const newGroup = await group.save()
                 res.status(202).json({ message: 'marhaba', group: newGroup })
             }
@@ -173,23 +171,21 @@ class ParticipantController {
                         id_question_token: saveQT._id
                     })
                     const saveRound = await round.save()
-                    // console.log(findQuestion);
                     if (findQuestion.answer == req.body.anwser) {
                         console.log('correct');
                         const addPoint = await Participant.updateOne({ _id: tokenDecode._id }, { $inc: { points: findQuestion.points } })
                     }
-                    //  else {
-                    //     console.log('incorrect');
-                    // }
+
                     if (groupMember.questions.length === 2) {
                         await groupMember.updateOne({ start: false })
-                        // find participant in group 
+
+                        // Find participant From the groupe
                         const part0 = await Participant.findById({ _id: groupMember.id_participants[0] }).select('points')
                         const part1 = await Participant.findOne({ _id: groupMember.id_participants[1] }).select('points')
                         const part2 = await Participant.findById({ _id: groupMember.id_participants[2] }).select('points')
                         const part3 = await Participant.findById({ _id: groupMember.id_participants[3] }).select('points')
 
-                        // store point in array 
+                        // store point
                         const points = [];
                         points.push(part0.points)
                         points.push(part1.points)
