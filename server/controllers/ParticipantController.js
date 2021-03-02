@@ -70,7 +70,7 @@ class ParticipantController {
                     code: await getNumber()
                 })
                 const newGroup = await group.save()
-                res.status(200).json({ message: 'tzad fa jdid', group: newGroup })
+                res.status(200).json({ message: 'Added', group: newGroup })
             } else {
 
                 const group = new Group({
@@ -78,7 +78,7 @@ class ParticipantController {
                     code: await getNumber()
                 })
                 const newGroup = await group.save()
-                res.status(202).json({ message: 'marhaba', group: newGroup })
+                res.status(202).json({ message: 'Welcome', group: newGroup })
             }
             saveLog("create group", "info", "creatGroup")
         } else {
@@ -120,7 +120,7 @@ class ParticipantController {
                 }
 
             } else {
-                res.status(404).send('code incorrct')
+                res.status(404).send('code incorrect')
             }
 
         } else {
@@ -208,7 +208,7 @@ class ParticipantController {
 
 
         } else {
-            res.status(401).send('your account is not validat')
+            res.status(401).send('your account is not validate')
         }
     }
 
