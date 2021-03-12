@@ -11,7 +11,7 @@ const {
 const log= require('./logs/log')
 const logs =require("../models/logs")
 
-
+//Get Adminds 
 exports.getAllAdmins = async (req, res) => {
   try {
     const admins = await Admin.find();
